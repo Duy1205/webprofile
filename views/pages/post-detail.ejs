@@ -1,0 +1,87 @@
+<%- include ('../partials3/sidebar') %>
+<%- include ('../partials3/header') %>
+<div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card  card-plain">
+        <div class="card-header">
+            <a href=""><h3 class="card-title"> Danh Sách Bài Viết</h3></a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+            <table class="table tablesorter " id="">
+                <thead class=" text-primary">
+                <tr>
+                    <th>
+                        Ảnh Bài Viết
+                        </th>
+                    <th>
+                    Tên Bài Viết
+                    </th>
+                    
+                    <th>
+                    Người Viết
+                    </th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                            <tr>
+                                <td><img src="../images/news/<%= infoPost.avatar %> " width="200" height="200"></td>
+                                <td><%= infoPost.name %> </a></td>
+                                <td><%= infoPost.user.fullname %></td>
+                                
+                            </tr>
+                </tbody>
+            </table> 
+            <br>
+                <th>
+                Nội Dung
+                </th>
+                <td ><%- infoPost.content%></td>
+                <br>
+                <td>
+                    <button class="btn btn-danger" _postID="<%= infoPost._id%>" _userID="<%= infoPost.user._id %> " id="btnRemovePost" type='submit'>
+                    <i class="fa fa-times"></i> 
+                        Xóa
+                    </button>
+                    <a href="/posts/edit-post/<%= infoPost._id %> ">
+                        <button class="btn btn-success" id="btnUpdate" type='submit'>
+                        <i class="fa fa-check-square-o"></i>
+                        Sửa
+                        </button>
+                    </a>
+                </td>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include ('../partials3/footer') %>
+
+
+<script>
+
+    $(document).on('click', '#btnRemovePost',function(e){
+        e.preventDefault();
+        let postID = $(this).attr('_postID');
+        let userID = $(this).attr('_userID');
+
+        console.log({postID})
+        if (window.confirm('Bạn có chắc chắn xóa không?')) {
+            
+            $.ajax({
+                url: `/posts/remove-post?postID=${postID}&userID=${userID}`,
+                method: 'POST',
+                success: resp=>{
+                    if(! resp.error){
+                        window.location.href = "/listTable"
+                    }else{
+                        toastr.warning("Ban kh xoa dc", "Canh Bao")
+                    }
+                }
+            })
+        }
+    })
+</script>

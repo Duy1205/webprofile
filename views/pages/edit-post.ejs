@@ -1,0 +1,147 @@
+<%- include ('../partials2/sidebar') %>
+<%- include ('../partials2/header') %>
+         <style>
+         .inputfile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+         }
+         </style>
+         <!-- Right Sidebar Panel Start-->
+         <!-- <div class="right-sidebar-mini right-sidebar">
+            <div class="right-sidebar-panel p-0">
+               <div class="iq-card shadow-none">
+                  <div class="iq-card-body p-0">
+                     <div class="media-height p-3">
+                        <div class="media align-items-center mb-4">
+                           <div class="iq-profile-avatar status-online">
+                              <img class="rounded-circle avatar-50" src="../dashboard/images/user/01.jpg" alt>
+                           </div>
+                           <div class="media-body ml-3">
+                              <h6 class="mb-0"><a href="#">Anna Sthesia</a></h6>
+                              <p class="mb-0">Admin</p>
+                           </div>
+                        </div>
+                        <div class="media align-items-center mb-4">
+                           <div class="iq-profile-avatar status-online">
+                              <img class="rounded-circle avatar-50" src="../dashboard/images/user/02.jpg" alt>
+                           </div>
+                           <div class="media-body ml-3">
+                              <h6 class="mb-0"><a href="#">Paul Molive</a></h6>
+                              <p class="mb-0">Admin</p>
+                           </div>
+                        </div>
+                        
+                        <div class="media align-items-center">
+                           <div class="iq-profile-avatar">
+                              <img class="rounded-circle avatar-50" src="../dashboard/images/user/02.jpg" alt>
+                           </div>
+                           <div class="media-body ml-3">
+                              <h6 class="mb-0"><a href="#">Monty Carlo</a></h6>
+                              <p class="mb-0">Admin</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="right-sidebar-toggle bg-primary mt-3">
+                        <i class="ri-arrow-left-line side-left-icon"></i>
+                        <i class="ri-arrow-right-line side-right-icon"><span class="ml-3 d-inline-block">Close Menu</span></i> 
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div> -->
+         <!-- Right Sidebar Panel End-->
+         <!-- Page Content  -->
+         <div id="content-page" class="content-page">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 style="font-family: utm-avo">CHỈNH SỬA BÀI VIẾT</h4>
+                           </div>
+                        </div>
+                        <div class="iq-card-body">
+                           <div class="acc-edit">
+                              <form>
+                                  <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Người Tạo</label>
+                                    <select class="form-control" id="userID">
+                                       <% if (listUser && listUser.length) { %>
+                                        <% listUser.forEach(user => { %>
+                                            <% if (user._id.toString() == infoPost.user._id.toString()) { %>
+                                                    <option value="<%=infoPost.user._id %>" selected>
+                                                        <%=infoPost.user.fullname %> 
+                                                    </option>
+                                                <%} else {%>
+                                                    <option value="<%=user._id %>">
+                                                        <%=user.fullname %> 
+                                                    </option>
+                                                <%}%>
+                                        <% }) %>
+                                       <% } %>
+                                    </select>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="uname">Title</label>
+                                    <input type="text" class="form-control" id="name"  name="name" value="<%= infoPost.name%>">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="facebook">Content</label>
+                                    <textarea class="ckeditor" cols="80" id="content"  name="content" rows="10"><%= infoPost.content%></textarea>
+                                 </div>
+                                 <button type="submit" _postID=<%= infoPost._id%> class="btn btn-primary btnSave">Lưu lại</button>
+                                 <button type="reset" class="btn iq-bg-danger btnCancle"><a href="/listTable">Hủy</a></button>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+<%- include ('../partials2/footer') %>
+
+<script>
+   
+   CKEDITOR.replace( 'content' );
+   $(document).on('click', '.btnSave', function(e){
+      e.preventDefault();
+      let postID = $(this).attr('_postID');
+      let user = $('#userID').val().trim();
+      let name = $('#name').val().trim();
+      var content = CKEDITOR.instances['content'].getData();
+      console.log({ postID, user, content, name })
+      if(!user || !content || !name){
+         toastr.warning('Bạn cần phải nhập thêm nội dung','Nhập Thêm')
+      }
+      else{
+      $.ajax({
+         url: `/posts/update-post/${postID}`,
+         method: 'POST',
+         data: { user, name, content},
+         success: resp => {
+            console.log({ resp })
+            //console.log(resp.error);
+            
+            if(!resp.error){
+            toastr.success('Thêm Thành Công','Thành Công')
+            window.location.href= "/listTable";
+            // window.location.href="/dashboard"
+            } else {
+            toastr.error('Thêm Không Thành Công','Thất Bại')
+            // alert("Đăng Nhập Không Thành Công")
+            }
+         },
+         error: err => {
+            console.log(err)
+         }
+      })
+   }
+   });
+</script>

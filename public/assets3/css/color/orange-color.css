@@ -1,0 +1,102 @@
+/*-----------------------------------------------------------
+* Template Name    : Arshia - Fully Responsive Personal Template
+* Author           : Retrina Group
+* Version          : 1.0.0
+* Created          : June 2020
+* File Description : Color sass file of the template
+*------------------------------------------------------------*/
+::-moz-selection {
+  background: rgba(170, 33, 140, 0.363);
+}
+::selection {
+  background: rgba(170, 33, 140, 0.363);
+}
+
+::-moz-selection {
+  background: rgba(170, 33, 140, 0.363);
+}
+
+.base-color {
+  color: royalblue !important;
+}
+
+.hero-social li a:hover, .blog-link a:hover {
+  color: royalblue !important;
+}
+
+.bg-base-color {
+  background-color: royalblue !important;
+}
+
+.follow-label:before,
+.skill-box .fill-skillbar,
+.timeline-area:before,
+.testimonial .testimonial-border,
+.blog-content:before,
+.blog .owl-dot.active span {
+  background: royalblue;
+}
+
+.testimonial .owl-dot.active span {
+  background: royalblue !important;
+}
+
+.menu li a,
+header .navbar-brand span,
+header .navbar-brand b,
+.pill-button,
+.pill-button:hover,
+.ability ul li:before,
+.timeline-icon,
+.timeline-year,
+.language-skill ul li i,
+.contact .form-item .form-control,
+.portfolio .portfolio-icon a,
+.portfolio .portfolio-icon button,
+.comments .comment-info a,
+.blog-content button:hover,
+.comments .comment-info a:hover,
+.social a:hover {
+  color: royalblue;
+}
+
+.loader {
+  border-top: 4px solid royalblue !important;
+}
+
+.timeline-icon {
+  border: 1px solid royalblue;
+  background-color: royalblue;
+}
+
+.portfolio .portfolio-item-content::before {
+  background-color: rgba(255, 93, 86, 0.6);
+}
+
+.menu-toggler span {
+  background-color: royalblue;
+}
+
+.timeline-item:before {
+  border: 2px solid royalblue;
+}
+
+.timeline-item:before {
+  border: 1px solid royalblue;
+}
+
+/*-------------------------
+      Flat Demo
+-------------------------*/
+.flat-demo .button-border, .arshia-dark.flat-demo .button-border {
+  background-color: royalblue;
+}
+
+.flat-demo .pill-button:hover, .flat-demo .pill-button.active {
+  background-color: royalblue;
+}
+
+.arshia-dark .hero-social li a:hover {
+  color: royalblue !important;
+}
+/*# sourceMappingURL=orange-color.css.map */

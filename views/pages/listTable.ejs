@@ -1,0 +1,293 @@
+<%- include ('../partials3/sidebar') %>
+<%- include ('../partials3/header') %>
+<div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title"> Quản Lý Chủ Đề</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th>
+                          Tên Album
+                        </th>
+                        <th>
+                            Số Lượng Ảnh
+                        </th>
+                        <th>
+                          Tác Vụ
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% if (listTopic && listTopic.length) { %>
+                            <% listTopic.slice(0,10).forEach((item, index ) => { %>
+                            <tr>
+                            <td><a href="/topics/info-topicdb?topicID=<%=item._id%>"><%= item.name %></a> </td>
+                            <td><%= item.imgs.length %> </td>
+                            <td>
+                                <button class="btn btn-danger" _topicID="<%= item._id%>" id="btnRemove" type='submit'>
+                                <i class="fa fa-times"></i> 
+                                    Xóa
+                                </button>
+                                <a href="/topics/edit-topic/<%= item._id %> ">
+                                    <button class="btn btn-success" id="btnUpdate" type='submit'>
+                                    <i class="fa fa-check-square-o"></i>
+                                    Sửa
+                                    </button>
+                                </a>
+                            </td>
+                            </tr>
+                            <% }) %>
+                        <% } %>
+                    </tbody>
+                  </table>
+                  <span><a href="/listTopic">Xem tất cả</a></span>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card  card-plain">
+        <div class="card-header">
+            <a href=""><h3 class="card-title"> Quản Lý Bài Viết</h3></a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+            <table class="table tablesorter " id="">
+                <thead class=" text-primary">
+                <tr>
+                    <th>
+                    STT
+                    </th>
+                    <th>
+                    Tên Bài Viết
+                    </th>
+                    <th>
+                    Nội Dung
+                    </th>
+                    <th>
+                    Người Viết
+                    </th>
+                    <th class="text-center">
+                    Tác Vụ
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% if(listPost && listPost.length){ %>
+                        <%listPost.slice(0,10).forEach((item, index) => {%>
+                            <tr>
+                                <td><%= index+1 %> </td>
+                                <td><a href="/posts/info-post?postID=<%=item._id%>"><%= item.name.substring(0,35) %> </a></td>
+                                <td ><%- item.content.substring(0,25)%></td>
+                                <td><%= item.user.fullname %></td>
+                                <td>
+                                    <button class="btn btn-danger" _postID="<%= item._id%>" _userID="<%= item.user._id %> " id="btnRemovePost" type='submit'>
+                                    <i class="fa fa-times"></i> 
+                                        Xóa
+                                    </button>
+                                    <a href="/posts/edit-post/<%= item._id %> ">
+                                        <button class="btn btn-success" id="btnUpdate" type='submit'>
+                                        <i class="fa fa-check-square-o"></i>
+                                        Sửa
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+            </table>
+            <span><a href="/listPost">Xem tất cả</a></span>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card  card-plain">
+          <div class="card-header">
+            <h4 class="card-title"> Quản Lý Tài Khoản Người Dùng</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table tablesorter " id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>
+                      Họ và Tên
+                    </th>
+                    <th>
+                      Email
+                    </th>
+                    <th>
+                      Mô Tả Bản Thân
+                    </th>
+                    <th>
+                      Tác Vụ
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% if (listUser && listUser.length) { %>
+                        <% listUser.slice(0,10).forEach(item => { %>
+                          <% if(item.role == 0)  {%> 
+                          <tr>
+                          <td><a href="users/info-user?userID=<%=item._id%>"><%= item.fullname%> </a></td>
+                          <td ><%=item.email%></td>
+                          <td><%= item.description.substring(0,10) %></td>
+                          <td>
+                              <button class="btn btn-danger" _userID="<%= item._id%>" id="btnRemoveUser" type='submit'>
+                              <i class="fa fa-times"></i> 
+                                  Xóa
+                              </button>
+                          </td>
+                          </tr>
+                          <% } %>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+              </table>
+              <span><a href="/listUser">Xem tất cả</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card  card-plain">
+          <div class="card-header">
+            <h4 class="card-title"> Quản Lý Tài Khoản Admin</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table tablesorter " id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>
+                      Họ và Tên
+                    </th>
+                    <th>
+                      Email
+                    </th>
+                    <th>
+                      Mô Tả Bản Thân
+                    </th>
+                    <th>
+                      Tác Vụ
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% if (listUser && listUser.length) { %>
+                        <% listUser.forEach(item => { %>
+                          <% if(item.role == 1)  {%> 
+                          <tr>
+                          <td><a href="edit-admin/userID=<%=item._id%>"><%= item.fullname%> </a></td>
+                          <td ><%=item.email%></td>
+                          <td><%= item.description.substring(0,10) %></td>
+                          <td>
+                              <button class="btn btn-danger" _userID="<%= item._id%>" id="btnRemoveAdmin" type='submit'>
+                              <i class="fa fa-times"></i> 
+                                  Xóa
+                              </button>
+                          </td>
+                          </tr>
+                          <% } %>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include ('../partials3/footer') %>
+
+
+<script>
+    $(document).on('click', '#btnRemove',function(e){
+        e.preventDefault();
+        let topicID = $(this).attr('_topicID');
+        console.log({topicID})
+        if (window.confirm('Bạn có chắc chắn xóa không?')) {
+            $.ajax({
+                url: `/topics/remove-topic/${topicID}`,
+                method: 'POST',
+                success: resp=>{
+                    if(! resp.error){
+                        window.location.href = "/listTable"
+                    }else{
+                        toastr.warning("Ban kh xoa dc", "Canh Bao")
+                    }
+                }
+            })
+        }
+    })
+
+    $(document).on('click', '#btnRemovePost',function(e){
+        e.preventDefault();
+        let postID = $(this).attr('_postID');
+        let userID = $(this).attr('_userID');
+
+        console.log({postID})
+        if (window.confirm('Bạn có chắc chắn xóa không?')) {
+            
+            $.ajax({
+                url: `/posts/remove-post?postID=${postID}&userID=${userID}`,
+                method: 'POST',
+                success: resp=>{
+                    if(! resp.error){
+                        window.location.href = "/listTable"
+                    }else{
+                        toastr.warning("Ban kh xoa dc", "Canh Bao")
+                    }
+                }
+            })
+        }
+    })
+    
+    $(document).on('click', '#btnRemoveUser',function(e){
+        e.preventDefault();
+        let userID = $(this).attr('_userID');
+        console.log({userID})
+        if (window.confirm('Bạn có chắc chắn xóa không?')) {
+            
+            $.ajax({
+                url: `/users/remove-user/${userID}`,
+                method: 'POST',
+                success: resp=>{
+                    if(! resp.error){
+                        window.location.href = "/listTable"
+                    }else{
+                        toastr.warning("Ban kh xoa dc", "Canh Bao")
+                    }
+                }
+            })
+        }
+    })
+    $(document).on('click', '#btnRemoveAdmin',function(e){
+        e.preventDefault();
+        let userID = $(this).attr('_userID');
+        console.log({userID})
+        if (window.confirm('Bạn có chắc chắn xóa không?')) {
+            
+            $.ajax({
+                url: `/users/remove-user/${userID}`,
+                method: 'POST',
+                success: resp=>{
+                    if(! resp.error){
+                        window.location.href = "/listTable"
+                    }else{
+                        toastr.warning("Ban kh xoa dc", "Canh Bao")
+                    }
+                }
+            })
+        }
+    })
+</script>

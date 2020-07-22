@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Đăng Ký</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
+  <link href="/build/toastr.min.css" rel="stylesheet"/>
+</head>
+
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Mời bạn nhập Thông Tin</h1>
+              </div>
+              <form class="user">
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="fullname" placeholder="Họ Tên">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="email" class="form-control form-control-user" id="email" placeholder="Địa Chỉ Email">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="password" class="form-control form-control-user" id="password" placeholder="Mật Khẩu">
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="birthday" placeholder="Ngày sinh">
+                    </div>
+                    <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="hobbies" placeholder="Sở Thích của bạn">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="phone" placeholder="Số Điện Thoại">
+                    </div>
+                    <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="age" placeholder="Tuổi">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="instagram" placeholder="Instagram">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="facebook" placeholder="FaceBook">
+                        </div>
+                  </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="studyAt" placeholder="Đang Học Tại">
+                    </div>
+                    <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="description" placeholder="Mô Tả về Bản Thân">
+                    </div>
+                </div>
+                <!-- birthday, hobbies, phone, age, instagram, studyAt, description -->
+               <hr>
+                <a href="" class="btn btn-primary btn-user btnRegister">
+                  Hoàn Thành
+                </a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script>
+
+  <script src="/build/toastr.min.js"></script>
+
+</body>
+
+</html>
+
+<script>
+    $(document).on('click','.btnRegister', function(e){
+      e.preventDefault();
+
+      // birthday, hobbies, phone, age, instagram, studyAt, description
+      let email = $('#fullname').val().trim();
+      let password = $('#email').val().trim();
+      let fullname = $('#password').val().trim();
+      let birthday = $('#birthday').val().trim();
+      let hobbies = $('#hobbies').val().trim();
+      let phone = $('#phone').val().trim();
+      let age = $('#age').val().trim();
+      let instagram = $('#instagram').val().trim();
+      let facebook = $('#facebook').val().trim();
+      let studyAt = $('#studyAt').val().trim();
+      let description = $('#description').val().trim();
+
+
+      console.log({email, password, fullname, birthday, hobbies, phone, age, instagram, facebook, studyAt, description});
+      if(!email || !password || !fullname || !birthday || !hobbies|| !phone|| !age|| !instagram|| !facebook || !studyAt|| !description){
+        toastr.warning('Bạn cần phải nhập thông tin đầy đủ', 'Nhập Thêm')
+      }else{
+        $.ajax({
+          url: '/users/register',
+          method: 'POST',
+          data: {email, password, fullname, birthday, hobbies, phone, age, instagram, facebook, studyAt, description},
+          success: resp => {
+              console.log(resp.error);
+              
+              if(!resp.error){
+                toastr.success('Đăng Ký Thành Công', 'Thành Công')
+                // alert("Đăng Ký Thành Công")
+                location.href="/users/dang-nhap"
+              } else {
+                toastr.error('Email này đã được tồn tại', 'Thất Bại')
+                // alert("Đăng Ký Không Thành Công")
+            }
+          },
+          error: err => {
+            console.log(err)
+          }
+        })
+      }
+    });
+</script>

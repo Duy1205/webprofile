@@ -1,0 +1,1386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Web - ProFile của Bé Nị</title>
+        <meta name="description" content>
+        <meta name="keywords" content>
+        <meta name="author" content="Retrina Group">
+
+        <!--  FavIcon  -->
+        <link rel="shortcut icon" href="../assets3/img/logoN2.ico">
+
+        <!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
+
+        <!-- Plugin Css -->
+        <link rel="stylesheet" href="assets3/css/plugins.css">
+        <!-- Colors Css -->
+        <link rel="stylesheet" href="assets3/css/color/orange-color.css" id="option-color">
+        <!--  Custom Style CSS  -->
+        <link rel="stylesheet" href="assets3/css/main.css">
+    </head>
+    <body data-spy="scroll" data-target="#scrollspy" data-offset="1" class="flat-demo">
+
+    <!--  Pre Loader  -->
+    <div id="overlayer"></div>
+    <span class="loader"></span>
+
+     <!-- Portfolio Single Modal Start -->
+      <% if(listImg && listImg.length){ %>
+            <% listImg.forEach(item => { %>
+                <div class="portfolio-single modal fade" data-target="<%= item._id %> " id="" tabindex="-1" role="dialog" aria-labelledby="portfolioModalScrollable" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content text-muted">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="portfolioModalScrollable">Chi Tiết Ảnh</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="pt-4 pb-5">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 col-md-10 mx-auto">
+                                                <div class="text-center">
+                                                    <h2 class="mb-3">Thông Tin <span class="base-color"> Ảnh</span></h2>
+                                                    <p class="max-width-450"><%= infoUser.fullname %> </p>
+                                                </div>
+                                                <div class="row contact-info mt-5">
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <div>
+                                                                <h6>Người Tạo :</h6>
+                                                                <p class="mb-0"><%= item.user.fullname %></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                            <div class="col-md-4 p-title-border mt-3 mt-md-0">
+                                                                <div class="text-center">
+                                                                    <div>
+                                                                        <h6 class="contact_detail-title">Ngày Tạo :</h6>
+                                                                        <div class="date"><%=moment(item.createAt).format('ll');%></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-3 mt-md-0">
+                                                                <div class="text-center">
+                                                                    <div>
+                                                                        <h6>Chủ Đề Album :</h6>
+                                                                        <p class="mb-0"> <%= item.topic.name%></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="mt-5">
+                                                                <div class="portfolio-single-item image-border">
+                                                                    <img src="../images/news/<%= item.avatar %> " class="d-block" alt="...">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-md-left mt-5">
+                                                                <p class="my-3"><%- item.content  %> </p>
+                                                            </div>
+                                                       
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% }%>  
+    <!--  Portfolio Single Modal End  -->
+
+    <!-- Blog Single Modal Start -->
+    <% if(listPost && listPost.length){ %>
+        <% listPost.slice(0,1).forEach(item => { %>
+            <div class="blog-single modal fade" id="blog-single" tabindex="-1" role="dialog" aria-labelledby="blogModalScrollable" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="blogModalScrollable">Chi Tiết Bài Viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--   Blog-single   Start -->
+                            <div class="pt-4 pb-5 text-muted">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10 mx-auto blog">
+                                            <div class="rounded px-lg-5">
+                                                <div class="text-md-left">
+                                                    <h4 class="mb-4"><%= item.name %> </h4>
+                                                    <div class="image-border">
+                                                        <img src="../images/news/<%= item.avatar %> " alt>
+                                                    </div>
+                                                    <span class="d-inline-block py-4"> <div class="date"><%=moment(item.createAt).format('L');%></div> <br>
+                                                Viết Bởi : <span class="purple-color text-right"> <%= item.user.fullname %>  </span>
+                                                </span>
+                                                    <p><%- item.content %> </p>
+                                                <div class="helpful like-post-action" >
+                                                    <% if(infoUser) {%>
+                                                        <% if (item.like.includes(infoUser._id)) {%>
+                                                            <a class="like like-post" id="un-like-post" style="color: red;" _postID ="<%=item._id%>" href="#">Bỏ thích </a>
+                                                            <%}else{%>
+                                                            <a class="like like-post" id="like-post" style="color: red;" _postID ="<%=item._id%>" href="#">Yêu Thích </a>
+                                                            <%}%>
+                                                            <p > <span id="totalLike"></span> </p>
+                                                    <%}%>
+                                                </div>
+                                                    <!--Blog Reply-->
+                                                    <div class="contact mt-4">
+                                                        <div class="contact-form">
+                                                            <h2 class="text-left mb-4">Để lại một lời nhắn</h2>
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="name" id="blog-name" type="text" readonly class="form-control" placeholder="Tên của bạn*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="email" id="blog-email" type="email" readonly class="form-control" placeholder="Email của bạn*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 form-item">
+                                                                        <div class="form-group">
+                                                                            <textarea name="comments" id="blog-comments" rows="4" readonly class="form-control" placeholder="Lời nhắn của bạn..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 mt-4 text-left">
+                                                                        <div class="button-border">
+                                                                            <button type="submit" class="pill-button" id="blog-submit-btn">Gửi</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% }%>  
+    <% if(listPost && listPost.length){ %>
+        <% listPost.slice(1,2).forEach(item => { %>
+            <div class="blog-single modal fade" id="blog-single2" tabindex="-1" role="dialog" aria-labelledby="blogModalScrollable" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="blogModalScrollable">Chi Tiết Bài Viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--   Blog-single   Start -->
+                            <div class="pt-4 pb-5 text-muted">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10 mx-auto blog">
+                                            <div class="rounded px-lg-5">
+                                                <div class="text-md-left">
+                                                    <h4 class="mb-4"><%= item.name %> </h4>
+                                                    <div class="image-border">
+                                                        <img src="../images/news/<%= item.avatar %> " alt>
+                                                    </div>
+                                                    <span class="d-inline-block py-4"> <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                Viết Bởi : <span class="purple-color text-right"> <%= item.user.fullname %>  </span>
+                                                </span>
+                                                    <p><%- item.content %> </p>
+                                                    <div class="helpful like-post-action2" >
+                                                        <% if(infoUser) {%>
+                                                            <% if (item.like.includes(infoUser._id)) {%>
+                                                                <a class="like like-post2" style="color: red;" id="un-like-post2" _postID ="<%=item._id%>" href="#">Bỏ thích </a>
+                                                                <%}else{%>
+                                                                <a class="like like-post2" style="color: red;" id="like-post2" _postID ="<%=item._id%>" href="#">Yêu Thích </a>
+                                                                <%}%>
+                                                                <p ><span id="totalLike"></span> </p>
+                                                        <%}%>
+                                                    </div>
+                                                    <!--Blog Reply-->
+                                                    <div class="contact mt-4">
+                                                        <div class="contact-form">
+                                                            <h2 class="text-left mb-4">Để lại một lời nhắn</h2>
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="name" id="blog-name" type="text" readonly class="form-control" placeholder="Tên của bạn*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="email" id="blog-email" type="email" readonly class="form-control" placeholder="Your Email*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 form-item">
+                                                                        <div class="form-group">
+                                                                            <textarea name="comments" id="blog-comments" rows="4" readonly class="form-control" placeholder="Your message..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 mt-4 text-left">
+                                                                        <div class="button-border">
+                                                                            <button type="submit" class="pill-button" id="blog-submit-btn">Gửi</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% }%>  
+    <% if(listPost && listPost.length){ %>
+        <% listPost.slice(2,3).forEach(item => { %>
+            <div class="blog-single modal fade" id="blog-single3" tabindex="-1" role="dialog" aria-labelledby="blogModalScrollable" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="blogModalScrollable">Chi Tiết Bài Viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--   Blog-single   Start -->
+                            <div class="pt-4 pb-5 text-muted">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10 mx-auto blog">
+                                            <div class="rounded px-lg-5">
+                                                <div class="text-md-left">
+                                                    <h4 class="mb-4"><%= item.name %> </h4>
+                                                    <div class="image-border">
+                                                        <img src="../images/news/<%= item.avatar %> " alt>
+                                                    </div>
+                                                    <span class="d-inline-block py-4"> <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                Viết Bởi : <span class="purple-color text-right"> <%= item.user.fullname %>  </span>
+                                                </span>
+                                                    <p><%- item.content %> </p>
+                                                    <div class="helpful like-post-action3" >
+                                                        <% if(infoUser) {%>
+                                                            <% if (item.like.includes(infoUser._id)) {%>
+                                                                <a class="like like-post3" style="color: red;" id="un-like-post3" _postID ="<%=item._id%>" href="#">Bỏ thích </a>
+                                                                <%}else{%>
+                                                                <a class="like like-post3" style="color: red;" id="like-post3" _postID ="<%=item._id%>" href="#">Yêu Thích </a>
+                                                                <%}%>
+                                                                <p ><span id="totalLike"></span> </p>
+                                                        <%}%>
+                                                    </div>
+                                                    <!--Blog Reply-->
+                                                    <div class="contact mt-4">
+                                                        <div class="contact-form">
+                                                            <h2 class="text-left mb-4">Để lại một lời nhắn</h2>
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="name" id="blog-name" type="text" readonly class="form-control" placeholder="Tên của bạn*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="email" id="blog-email" type="email" readonly class="form-control" placeholder="Your Email*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 form-item">
+                                                                        <div class="form-group">
+                                                                            <textarea name="comments" id="blog-comments" rows="4" readonly class="form-control" placeholder="Your message..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 mt-4 text-left">
+                                                                        <div class="button-border">
+                                                                            <button type="submit" class="pill-button" id="blog-submit-btn">Gửi</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% }%>  
+    <% if(listPost && listPost.length){ %>
+        <% listPost.slice(3,4).forEach(item => { %>
+            <div class="blog-single modal fade" id="blog-single4" tabindex="-1" role="dialog" aria-labelledby="blogModalScrollable" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="blogModalScrollable">Chi Tiết Bài Viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--   Blog-single   Start -->
+                            <div class="pt-4 pb-5 text-muted">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10 mx-auto blog">
+                                            <div class="rounded px-lg-5">
+                                                <div class="text-md-left">
+                                                    <h4 class="mb-4"><%= item.name %> </h4>
+                                                    <div class="image-border">
+                                                        <img src="../images/news/<%= item.avatar %> " alt>
+                                                    </div>
+                                                    <span class="d-inline-block py-4"> <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                Viết Bởi : <span class="purple-color text-right"> <%= item.user.fullname %>  </span>
+                                                </span>
+                                                    <p><%- item.content %> </p>
+                                                    <div class="helpful like-post-action4" >
+                                                        <% if(infoUser) {%>
+                                                            <% if (item.like.includes(infoUser._id)) {%>
+                                                                <a class="like like-post4" style="color: red;" id="un-like-post4" _postID ="<%=item._id%>" href="#">Bỏ thích </a>
+                                                                <%}else{%>
+                                                                <a class="like like-post4" style="color: red;" id="like-post4" _postID ="<%=item._id%>" href="#">Yêu Thích </a>
+                                                                <%}%>
+                                                                <p ><span id="totalLike"></span> </p>
+                                                        <%}%>
+                                                    </div>
+                                                    <!--Blog Reply-->
+                                                    <div class="contact mt-4">
+                                                        <div class="contact-form">
+                                                            <h2 class="text-left mb-4">Để lại một lời nhắn</h2>
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="name" id="blog-name" type="text" readonly class="form-control" placeholder="Tên của bạn*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="email" id="blog-email" type="email" readonly class="form-control" placeholder="Your Email*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 form-item">
+                                                                        <div class="form-group">
+                                                                            <textarea name="comments" id="blog-comments" rows="4" readonly class="form-control" placeholder="Your message..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 mt-4 text-left">
+                                                                        <div class="button-border">
+                                                                            <button type="submit" class="pill-button" id="blog-submit-btn">Gửi</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% }%>  
+    <% if(listPost && listPost.length){ %>
+        <% listPost.slice(4,5).forEach(item => { %>
+            <div class="blog-single modal fade" id="blog-single5" tabindex="-1" role="dialog" aria-labelledby="blogModalScrollable" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="blogModalScrollable">Chi Tiết Bài Viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--   Blog-single   Start -->
+                            <div class="pt-4 pb-5 text-muted">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10 mx-auto blog">
+                                            <div class="rounded px-lg-5">
+                                                <div class="text-md-left">
+                                                    <h4 class="mb-4"><%= item.name %> </h4>
+                                                    <div class="image-border">
+                                                        <img src="../images/news/<%= item.avatar %> " alt>
+                                                    </div>
+                                                    <span class="d-inline-block py-4"> <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                Viết Bởi : <span class="purple-color text-right"> <%= item.user.fullname %>  </span>
+                                                </span>
+                                                    <p><%- item.content %> </p>
+                                                    <div class="helpful like-post-action5" >
+                                                        <% if(infoUser) {%>
+                                                            <% if (item.like.includes(infoUser._id)) {%>
+                                                                <a class="like like-post5" style="color: red;" id="un-like-post5" _postID ="<%=item._id%>" href="#">Bỏ thích </a>
+                                                                <%}else{%>
+                                                                <a class="like like-post5" style="color: red;" id="like-post5" _postID ="<%=item._id%>" href="#">Yêu Thích </a>
+                                                                <%}%>
+                                                                <p ><span id="totalLike"></span> </p>
+                                                        <%}%>
+                                                    </div>
+                                                    <!--Blog Reply-->
+                                                    <div class="contact mt-4">
+                                                        <div class="contact-form">
+                                                            <h2 class="text-left mb-4">Để lại một lời nhắn</h2>
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="name" id="blog-name" type="text" readonly class="form-control" placeholder="Tên của bạn*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="email" id="blog-email" type="email" readonly class="form-control" placeholder="Your Email*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 form-item">
+                                                                        <div class="form-group">
+                                                                            <textarea name="comments" id="blog-comments" rows="4" readonly class="form-control" placeholder="Your message..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 mt-4 text-left">
+                                                                        <div class="button-border">
+                                                                            <button type="submit" class="pill-button" id="blog-submit-btn">Gửi</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% }%>  
+    <% if(listPost && listPost.length){ %>
+        <% listPost.slice(5,6).forEach(item => { %>
+            <div class="blog-single modal fade" id="blog-single6" tabindex="-1" role="dialog" aria-labelledby="blogModalScrollable" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="blogModalScrollable">Chi Tiết Bài Viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--   Blog-single   Start -->
+                            <div class="pt-4 pb-5 text-muted">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10 mx-auto blog">
+                                            <div class="rounded px-lg-5">
+                                                <div class="text-md-left">
+                                                    <h4 class="mb-4"><%= item.name %> </h4>
+                                                    <div class="image-border">
+                                                        <img src="../images/news/<%= item.avatar %> " alt>
+                                                    </div>
+                                                    <span class="d-inline-block py-4"> <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                Viết Bởi : <span class="purple-color text-right"> <%= item.user.fullname %>  </span>
+                                                </span>
+                                                    <p><%- item.content %> </p>
+                                                    <div class="helpful like-post-action6" >
+                                                        <% if(infoUser) {%>
+                                                            <% if (item.like.includes(infoUser._id)) {%>
+                                                                <a class="like like-post6" style="color: red;" id="un-like-post6" _postID ="<%=item._id%>" href="#">Bỏ thích </a>
+                                                                <%}else{%>
+                                                                <a class="like like-post6" style="color: red;" id="like-post6" _postID ="<%=item._id%>" href="#">Yêu Thích </a>
+                                                                <%}%>
+                                                                <p ><span id="totalLike"></span> </p>
+                                                        <%}%>
+                                                    </div>
+                                                    <!--Blog Reply-->
+                                                    <div class="contact mt-4">
+                                                        <div class="contact-form">
+                                                            <h2 class="text-left mb-4">Để lại một lời nhắn</h2>
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="name" id="blog-name" type="text" readonly class="form-control" placeholder="Tên của bạn*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 form-item">
+                                                                        <div class="form-group">
+                                                                            <input name="email" id="blog-email" type="email" readonly class="form-control" placeholder="Your Email*" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 form-item">
+                                                                        <div class="form-group">
+                                                                            <textarea name="comments" id="blog-comments" rows="4" readonly class="form-control" placeholder="Your message..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 mt-4 text-left">
+                                                                        <div class="button-border">
+                                                                            <button type="submit" class="pill-button" id="blog-submit-btn">Gửi</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% }%>  
+    <!--  Blog Single Modal End  -->
+
+
+    <main id="main">
+
+        <!--   Header Start -->
+        <header>
+            <div class="header-navbar h-100">
+                <a class="navbar-brand" href="/dashboard"><b>N</b><span><%=infoUser.facebook%></span></a>
+                <ul class="list-group menu text-center" id="menu">
+                    <li class="list-group-item"><a class="active" href="#hero"><i class="fa fa-home"></i><span>home</span></a></li>
+                    <li class="list-group-item"><a href="#about"><i class="fa fa-user"></i><span>about</span></a></li>
+                    <% if(infoUser && infoUser.role == 1 ) {%> 
+                        <li class="list-group-item"><a href="#portfolio"><i class="fa fa-briefcase"></i><span>album</span></a></li>
+                        <li class="list-group-item"><a href="#blog"><i class="fa fa-file-text"></i><span>blog</span></a></li>
+                    <%}  %> 
+                    <li class="list-group-item"><a href="#contact"><i class="fa fa-envelope-open"></i><span>contact</span></a></li>
+                </ul>
+                <div class="menu-toggler">
+                    <span>
+                        <i class="text-white lni-menu"></i>
+                    </span>
+                </div>
+            </div>
+        </header>
+        <!--   Header End   -->
+
+        <!--  Hero Start  -->
+        <section id="hero" class="hero-03 active">
+            <div class="display-table">
+                <div class="display-content">
+                    <div class="container">
+                        <div class="row justify-content-center hero-item">
+                            <div class="col-lg-12">
+                                <div class="hero-content">
+                                    
+                                    <h4 class="text-capitalize mb-0"><span class="base-color"> </span> <span class="element" style="color: royalblue;"  data-elements=" Hello Ni Nhi"></span></h4>
+                                     <br>
+                                     <br>
+                                     <br>    
+                                     <br>
+                                    <br>     
+                                    <br>
+                                     <br>
+                                     <br>    
+                                     <br>
+                                    <br>    
+                                    <h4 class="text-capitalize mb-0"><span class="base-color"> </span> <span class="element"  data-elements=" <%= infoUser.fullname %>"></span></h4>
+                                    <p class="max-width-450 mx-0 my-4" style="color: white;"><%=infoUser.description%></p>
+                                    <ul class="list-inline hero-social">
+                                        <% if(infoUser && infoUser.role == 1 ) {%> 
+                                            <li class="list-inline-item">
+                                                <a href="https://www.facebook.com/profile.php?id=100038052841846">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="/home">
+                                                    <i class="fa fa-linkedin"></i>
+                                                </a>
+                                            </li>
+                                        <% } %> 
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--  Hero End  -->
+
+        <!--   About Start   -->
+        <section id="about" class="about">
+            <div class="display-table">
+                <div class="display-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-center title">
+                                    <h2 class="text-dark">About <span class="base-color">Me</span></h2>
+                                    <p class="text-muted max-width-450 mb-5"><%= infoUser.description %> </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="image-border">
+                                    <img style="max-width : 500px ; max-height : 500px" src="/images/news/<%= infoUser.avatar%>" alt="avatar">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mt-4 mt-lg-0">
+                                <div class="personal-item ">
+                                    <h3 class="text-dark mt-4 mt-lg-0"><span class="base-color">FaceBook</span> <%= infoUser.facebook %></h3>
+                                    <div class="row">
+                                        <div class="col-6 personal-info">
+                                            <ul class="list-unstyled pt-4">
+                                                <li>
+                                                    <p>Ngày Sinh : <span> <%= infoUser.birthday %></span></p>
+                                                </li>
+                                                <li>
+                                                    <p>Sở Thích : <span><%= infoUser.hobbies %>  </span></p>
+                                                </li>
+                                                <li>
+                                                    <p>Điện Thoại : <span> (+84) <%= infoUser.phone %></span></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-6 personal-info">
+                                            <ul class="list-unstyled pt-4">
+                                                <li>
+                                                    <p>Tuổi : <span> <%= infoUser.age %></span></p>
+                                                </li>
+                                                <li>
+                                                    <p>Instagram : <span><%= infoUser.instagram %> </span></p>
+                                                </li>
+                                                <li>
+                                                    <p>Mail : <span> <%= infoUser.email %></span></p>
+                                                </li>
+                                                
+                                                <li>
+                                                    <p>Học Tại : <span> <%= infoUser.studyAt %></span></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="button-border mt-3 mb-lg-0 mr-4">
+                                    <a href="users/edit-user/<%=userID = infoUser._id %> " class="pill-button">Chỉnh Sửa</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- Count up Start -->
+                        <!--  Count up End  -->
+                        <!--  Service Start  -->
+                </div>
+            </div>
+        </section>
+        <!--    About End    -->
+
+        <!--    Resume Start   -->
+        <!--     Resume End    -->
+
+        <!-- Portfolio Start -->
+        <section id="portfolio" class="portfolio">
+            <div class="display-table">
+                <div class="display-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-center title">
+                                    <h2 class="text-dark">Album <span class="base-color">Ảnh</span></h2>
+                                    <p class="text-muted mb-5 max-width-450"> <%= infoUser.fullname%></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--   Portfolio Filters   -->
+                            <ul id="portfolio-filter" class="list-unstyled list-inline mb-0 col-lg-12 text-center portfolio-filter">
+                                        <li class="button-border list-inline-item">
+                                            <a href="#" data-filter="*" class="pill-button active">Tất Cả</a>
+                                        </li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-items row">
+                            <!-- Item 01 -->
+                            <% if(listImg && listImg.length){ %>
+                                <%listImg.forEach(item => {%>
+                                    <div class="col-lg-4 portfolio-item 2017">
+                                        <div class="image-border">
+                                            <div class="portfolio-item-content">
+                                                <img src="../images/news/<%= item.avatar %> " alt="/" class="img-fluid">
+                                                <div class="img-overlay text-center">
+                                                    <div class="img-overlay-content">
+                                                        <div class="portfolio-icon">
+                                                            <button data-toggle="modal" _imgID="<%= item._id%>" _topicID="<%= item.topic._id %>" _userID="<%= item.user._id %> " id="btnRemoveImg" type='submit'><i class="fa fa-times"></i></button>
+                                                            <!-- <button type="button" data-toggle="modal" data-target="#portfolio-single"><i class="lni-link"></i></button> -->
+                                                            <a href="../images/news/<%= item.avatar %> " class="js-zoom-gallery">
+                                                                <i class="lni-search"></i>
+                                                            </a>
+                                                        </div>
+                                                        <h5 class="mt-3 mb-0">Xem Ảnh</h5>
+                                                        <h4><%= item.topic.name %> </h4>
+                                                        <h8 class="mt-3 mb-0">Người Tạo <br><%= item.user.fullname %> </h8>
+                                                        <br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                <% })%>
+                            <% }%>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--  Portfolio End  -->
+
+        <!--  Blog Start  -->
+        <section id="blog" class="blog">
+            <div class="display-table">
+                <div class="display-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-center title">
+                                    <h2 class="text-dark">Bài Viết <span class="base-color">Mới</span></h2>
+                                    <p class="text-muted mb-5 max-width-450">Hãy viết lên suy nghĩ của bạn theo cách của bạn. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <%if (listPost && listPost.length) {%>
+                                <%listPost.slice(0,1).forEach(item => {%>
+                                    <div class="col-lg-4">
+                                        <div class="blog-item box-border">
+                                            <div class="blog-image">
+                                                <div class="blog-intro">
+                                                    <img src="../images/news/<%= item.avatar %> " alt="/">
+                                                </div>
+                                            </div>
+                                            <div class="blog-content">
+                                                <ul class="list-inline mt-4">
+                                                        <li class="list-inline-item">
+                                                            <i class="lni-calendar base-color"></i>
+                                                            <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                        </li>
+                                                    </ul>
+                                                    <h5 class="mb-3"><a class="text-dark" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single"><%= item.name %> </a></h5>
+                                                <p><%- item.content.substring(0,35) %> </p>
+                                                <div class="blog-link">
+                                                    <a class="base-color" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single">Xem Thêm...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%});%>
+                            <%}%>
+                            <%if (listPost && listPost.length) {%>
+                                <%listPost.slice(1,2).forEach(item => {%>
+                                    <div class="col-lg-4">
+                                        <div class="blog-item box-border">
+                                            <div class="blog-image">
+                                                <div class="blog-intro">
+                                                    <img src="../images/news/<%= item.avatar %> " alt="/">
+                                                </div>
+                                            </div>
+                                            <div class="blog-content">
+                                                <ul class="list-inline mt-4">
+                                                        <li class="list-inline-item">
+                                                            <i class="lni-calendar base-color"></i>
+                                                            <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                        </li>
+                                                    </ul>
+                                                    <h5 class="mb-3"><a class="text-dark" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single"><%= item.name %> </a></h5>
+                                                <p><%- item.content.substring(0,35) %> </p>
+                                                <div class="blog-link">
+                                                    <a class="base-color" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single2">Xem Thêm...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%});%>
+                            <%}%>
+                            <%if (listPost && listPost.length) {%>
+                                <%listPost.slice(2,3).forEach(item => {%>
+                                    <div class="col-lg-4">
+                                        <div class="blog-item box-border">
+                                            <div class="blog-image">
+                                                <div class="blog-intro">
+                                                    <img src="../images/news/<%= item.avatar %> " alt="/">
+                                                </div>
+                                            </div>
+                                            <div class="blog-content">
+                                                <ul class="list-inline mt-4">
+                                                        <li class="list-inline-item">
+                                                            <i class="lni-calendar base-color"></i>
+                                                            <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                        </li>
+                                                    </ul>
+                                                    <h5 class="mb-3"><a class="text-dark" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single"><%= item.name %> </a></h5>
+                                                <p><%- item.content.substring(0,35) %> </p>
+                                                <div class="blog-link">
+                                                    <a class="base-color" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single3">Xem Thêm...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%});%>
+                            <%}%>
+                            <%if (listPost && listPost.length) {%>
+                                <%listPost.slice(3,4).forEach(item => {%>
+                                    <div class="col-lg-4">
+                                        <div class="blog-item box-border">
+                                            <div class="blog-image">
+                                                <div class="blog-intro">
+                                                    <img src="../images/news/<%= item.avatar %> " alt="/">
+                                                </div>
+                                            </div>
+                                            <div class="blog-content">
+                                                <ul class="list-inline mt-4">
+                                                        <li class="list-inline-item">
+                                                            <i class="lni-calendar base-color"></i>
+                                                            <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                        </li>
+                                                    </ul>
+                                                    <h5 class="mb-3"><a class="text-dark" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single"><%= item.name %> </a></h5>
+                                                <p><%- item.content.substring(0,35) %> </p>
+                                                <div class="blog-link">
+                                                    <a class="base-color" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single4">Xem Thêm...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%});%>
+                            <%}%>
+                            <%if (listPost && listPost.length) {%>
+                                <%listPost.slice(4,5).forEach(item => {%>
+                                    <div class="col-lg-4">
+                                        <div class="blog-item box-border">
+                                            <div class="blog-image">
+                                                <div class="blog-intro">
+                                                    <img src="../images/news/<%= item.avatar %> " alt="/">
+                                                </div>
+                                            </div>
+                                            <div class="blog-content">
+                                                <ul class="list-inline mt-4">
+                                                        <li class="list-inline-item">
+                                                            <i class="lni-calendar base-color"></i>
+                                                            <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                        </li>
+                                                    </ul>
+                                                    <h5 class="mb-3"><a class="text-dark" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single"><%= item.name %> </a></h5>
+                                                <p><%- item.content.substring(0,35) %> </p>
+                                                <div class="blog-link">
+                                                    <a class="base-color" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single5">Xem Thêm...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%});%>
+                            <%}%>
+                            <%if (listPost && listPost.length) {%>
+                                <%listPost.slice(5,6).forEach(item => {%>
+                                    <div class="col-lg-4">
+                                        <div class="blog-item box-border">
+                                            <div class="blog-image">
+                                                <div class="blog-intro">
+                                                    <img src="../images/news/<%= item.avatar %> " alt="/">
+                                                </div>
+                                            </div>
+                                            <div class="blog-content">
+                                                <ul class="list-inline mt-4">
+                                                        <li class="list-inline-item">
+                                                            <i class="lni-calendar base-color"></i>
+                                                            <div class="date"><%=moment(item.createAt).format('L');%></div>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                        </li>
+                                                    </ul>
+                                                    <h5 class="mb-3"><a class="text-dark" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single"><%= item.name %> </a></h5>
+                                                <p><%- item.content.substring(0,35) %> </p>
+                                                <div class="blog-link">
+                                                    <a class="base-color" href="javascript:void(0)" target="_blank" data-toggle="modal" data-target="#blog-single6">Xem Thêm...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%});%>
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--   Blog End   -->
+
+        <!-- Contact Start -->
+        <section id="contact" class="contact">
+            <div class="display-table">
+                <div class="display-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-center title">
+                                    <h2 class="text-dark">Liên <span class="base-color">lạc với <%= infoUser.facebook%></span></h2>
+                                    <p class="text-muted mb-5 max-width-450">Would you come fly to me?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row contact-info">
+                            <div class="col-lg-4 mt-5">
+                                <div class="text-center">
+                                    <div class="base-color">
+                                        <i class="lni-phone-handset size-md"></i>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h5 class="text-dark mb-0">Gọi Cho Tôi</h5>
+                                        <small class="text-muted">(+84) <%= infoUser.phone%></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-5">
+                                <div class="text-center">
+                                    <div class="base-color">
+                                        <i class="lni-map-marker size-md"></i>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h5 class="text-dark mb-0 contact_detail-title">Gặp Tôi Ở</h5>
+                                        <small class="text-muted"><%= infoUser.studyAt%></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-5">
+                                <div class="text-center">
+                                    <div class="base-color">
+                                        <i class="lni-pointer size-md"></i>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h5 class="text-dark mb-0">Gửi Mail cho Tôi</h5>
+                                        <small class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ceafacad8ea9a3afa7a2e0ada1a3">[email&#160;protected]</a></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row copy-right">
+                            <div class="col-12 text-center">
+                                <p>Web Profile © 2020. Trang web đã được thiết kế bởi <span class="base-color">Duy Đẹp Trai</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--  Contact End  -->
+
+        <!--   Color Scheme  -->
+        <a class="color-scheme hide text-white bg-base-color d-inline-block" href="javascript:void(0)"><i class="lni-night"></i></a>
+        <a class="color-scheme hide color-scheme-light text-white bg-base-color d-none" href="javascript:void(0)"><i class="lni-sun"></i></a>
+
+        <!-- Start Color Pallet -->
+        <!-- <div id="color-switcher" class="color-switcher">
+            <div class="text-center color-pallet hide">
+                <h6 class="text-center mt-3">Changes color</h6>
+                <ul class="pattern">
+                    <li>
+                        <a class="color1" href="#"></a>
+                    </li>
+                    <li>
+                        <a class="color2" href="#"></a>
+                    </li>
+                    <li>
+                        <a class="color3" href="#"></a>
+                    </li>
+                    <li>
+                        <a class="color4" href="#"></a>
+                    </li>
+                    <li>
+                        <a class="color5" href="#"></a>
+                    </li>
+                    <li>
+                        <a class="color6" href="#"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="pallet-button hide">
+                <a href="#" class="cp-toggle rounded-left"><i class="fa fa-cog fa-spin"></i></a>
+            </div>
+        </div> -->
+        <!-- End Color Pallet -->
+
+
+
+    </main>
+
+
+    <!--  JavaScripts  -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets3/js/jquery-3.4.1.min.js"></script>
+    <!--  Plugin Js  -->
+    <script src="assets3/js/plugins.js"></script>
+    <!--  Particle App Js  -->
+    <script src="assets3/js/particles.app.js"></script>
+    <!--  Custom JS  -->
+    <script src="assets3/js/arshia.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script>
+  
+    <script src="/build/toastr.min.js"></script>
+
+    </body>
+</html>
+
+<script>
+    $(document).on('click', '#btnRemoveImg',function(e){
+        e.preventDefault();
+
+        let imgID = $(this).attr('_imgID');
+        let topicID = $(this).attr('_topicID');
+        let userID = $(this).attr('_userID');
+
+        console.log({imgID, topicID, userID})
+        if (window.confirm('Bạn có chắc chắn xóa không?')) {
+            $.ajax({
+                url: `/imgs/remove-img?imgID=${imgID}&topicID=${topicID}&userID=${userID}`,
+                method: 'POST',
+                success: resp=>{
+                    if(! resp.error){
+                        window.location.href = "/home"
+                    }else{
+                        toastr.warning("Ban kh xoa dc", "Canh Bao")
+                    }
+                }
+            })
+        }
+    })
+
+    $(document).on('click', '.like-post', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID, totalLike })
+        $.ajax({
+            url: `/posts/like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action').prepend(`
+                        <a class="like" id="un-like-post" style="color: red;" _postID ="${postID}" href="#"> Bỏ thích</a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) + 1);
+                    return toastr['success']('Đã thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+    $(document).on('click', '#un-like-post', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID })
+        $.ajax({
+            url: `/posts/un-like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action').prepend(`
+                        <a class="like like-post" style="color: red;" id="like-post" _postID ="${postID}" href="#">Yêu Thích </a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) - 1);
+                    return toastr['success']('Đã bỏ thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+
+    $(document).on('click', '.like-post2', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID, totalLike })
+        $.ajax({
+            url: `/posts/like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action2').prepend(`
+                        <a class="like" id="un-like-post2" style="color: red;" _postID ="${postID}" href="#"> Bỏ thích</a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) + 1);
+                    return toastr['success']('Đã thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+    $(document).on('click', '#un-like-post2', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID })
+        $.ajax({
+            url: `/posts/un-like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action2').prepend(`
+                        <a class="like like-post2" style="color: red;" id="like-post2" _postID ="${postID}" href="#">Yêu Thích </a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) - 1);
+                    return toastr['success']('Đã bỏ thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+
+    $(document).on('click', '.like-post3', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID, totalLike })
+        $.ajax({
+            url: `/posts/like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action3').prepend(`
+                        <a class="like" id="un-like-post3" style="color: red;" _postID ="${postID}" href="#"> Bỏ thích</a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) + 1);
+                    return toastr['success']('Đã thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+    $(document).on('click', '#un-like-post3', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID })
+        $.ajax({
+            url: `/posts/un-like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action3').prepend(`
+                        <a class="like like-post3" style="color: red;" id="like-post3" _postID ="${postID}" href="#">Yêu Thích </a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) - 1);
+                    return toastr['success']('Đã bỏ thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+
+    $(document).on('click', '.like-post4', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID, totalLike })
+        $.ajax({
+            url: `/posts/like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action4').prepend(`
+                        <a class="like" id="un-like-post4" style="color: red;" _postID ="${postID}" href="#"> Bỏ thích</a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) + 1);
+                    return toastr['success']('Đã thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+    $(document).on('click', '#un-like-post4', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID })
+        $.ajax({
+            url: `/posts/un-like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action4').prepend(`
+                        <a class="like like-post4" style="color: red;" id="like-post4" _postID ="${postID}" href="#">Yêu Thích </a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) - 1);
+                    return toastr['success']('Đã bỏ thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+
+    $(document).on('click', '.like-post5', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID, totalLike })
+        $.ajax({
+            url: `/posts/like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action5').prepend(`
+                        <a class="like" id="un-like-post5" style="color: red;" _postID ="${postID}" href="#"> Bỏ thích</a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) + 1);
+                    return toastr['success']('Đã thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+    $(document).on('click', '#un-like-post5', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID })
+        $.ajax({
+            url: `/posts/un-like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action5').prepend(`
+                        <a class="like like-post5" style="color: red;" id="like-post5" _postID ="${postID}" href="#">Yêu Thích </a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) - 1);
+                    return toastr['success']('Đã bỏ thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+
+    $(document).on('click', '.like-post6', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID, totalLike })
+        $.ajax({
+            url: `/posts/like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action6').prepend(`
+                        <a class="like" id="un-like-post6" style="color: red;" _postID ="${postID}" href="#"> Bỏ thích</a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) + 1);
+                    return toastr['success']('Đã thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+    $(document).on('click', '#un-like-post6', function(e) {
+		e.preventDefault();
+        let postID = $(this).attr("_postID");
+        let totalLike = $('#totalLike').text();
+        console.log({ postID })
+        $.ajax({
+            url: `/posts/un-like-post?postID=${postID}`,
+            method: 'GET',
+            success: resp => {
+                if(!resp.error){
+                    $(this).empty();
+                    $('.like-post-action6').prepend(`
+                        <a class="like like-post6" style="color: red;" id="like-post6" _postID ="${postID}" href="#">Yêu Thích </a>
+                    `)
+                    $('#totalLike').text(parseInt(totalLike) - 1);
+                    return toastr['success']('Đã bỏ thích bài viết', 'Thông báo');
+                }else{
+                    return toastr['error']('Thất bại', 'Thông báo');
+                }
+            },
+            error: err => console.log({ err })
+        });
+    })
+
+</script>

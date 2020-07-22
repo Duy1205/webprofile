@@ -1,0 +1,74 @@
+<%- include ('../partials3/sidebar') %>
+<%- include ('../partials3/header') %>
+<div class="content">
+    <div class="row">
+      <div class="col-md-12">
+            <div class="card  card-plain">
+            <div class="card-header">
+                <a href=""><h3 class="card-title"> <%=infoTopic.name%></h3></a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                    <tr>
+                        <th>
+                        STT
+                        </th>
+                        <th>
+                        Ảnh
+                        </th>
+                        <th>
+                        Nội Dung
+                        </th>
+                        <th>
+                        Chủ Đề
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% if(infoTopic.imgs && infoTopic.imgs.length){ %>
+                            <%infoTopic.imgs.forEach((item, index) => {%>
+                                <tr>
+                                    <td><%= index + 1 %> </td>
+                                    <td><img src="../images/news/<%= item.avatar %>" width="100" height="100"></td>
+                                    <td ><%- item.content.substring(0,25)%></td>
+                                    <td><%= infoTopic.name %></td>
+                                </tr>
+                            <% }) %>
+                        <% } %>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+<%- include ('../partials3/footer') %>
+
+
+<script>
+    $(document).on('click', '#btnRemoveImg',function(e){
+        e.preventDefault();
+        let imgID = $(this).attr('_imgID');
+        let topicID = $(this).attr('_topicID');
+        let userID = $(this).attr('_userID');
+        console.log({imgID, topicID, userID});
+        
+        if (window.confirm('Bạn có chắc chắn xóa không?')) {
+            
+            $.ajax({
+                url: `/imgs/remove-img?imgID=${imgID}&topicID=${topicID}&userID=${userID}`,
+                method: 'img',
+                success: resp=>{
+                    if(! resp.error){
+                        window.location.href = "/listTable"
+                    }else{
+                        toastr.warning("Ban kh xoa dc", "Canh Bao")
+                    }
+                }
+            })
+        }
+    })
+</script>

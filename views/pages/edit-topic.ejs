@@ -1,0 +1,76 @@
+<%- include ('../partials2/sidebar') %>
+<%- include ('../partials2/header') %>
+         <style>
+         .inputfile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+         }
+         </style>
+         <div id="content-page" class="content-page">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 style="font-family: utm-avo">CHỈNH SỬA CHỦ ĐỀ</h4>
+                           </div>
+                        </div>
+                        <div class="iq-card-body">
+                           <div class="acc-edit">
+                              <form>
+                                 <div class="form-group">
+                                    <label for="uname">Tên Chủ Đề</label>
+                                    <input type="text" class="form-control" id="name"  name="name" value="<%= infoTopic.name%>">
+                                 </div>
+                                 <button type="submit" _topicID=<%= infoTopic._id%> class="btn btn-primary btnSave">Lưu lại</button>
+                                 <button type="reset" class="btn iq-bg-danger btnCancle"><a href="/listTable">Hủy</a></button>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+<%- include ('../partials2/footer') %>
+
+<script>
+   
+   $(document).on('click', '.btnSave', function(e){
+      e.preventDefault();
+      let topicID = $(this).attr('_topicID');
+      let name = $('#name').val().trim();
+      if(!name){
+         toastr.warning('Bạn cần phải nhập thêm nội dung','Nhập Thêm')
+      }
+      else{
+      $.ajax({
+         url: `/topics/update-topic/${topicID}`,
+         method: 'POST',
+         data: { name},
+         success: resp => {
+            console.log({ resp })
+            //console.log(resp.error);
+            
+            if(!resp.error){
+            toastr.success('Thêm Thành Công','Thành Công')
+            window.location.href= "/listTable";
+            // window.location.href="/dashboard"
+            } else {
+            toastr.error('Thêm Không Thành Công','Thất Bại')
+            // alert("Đăng Nhập Không Thành Công")
+            }
+         },
+         error: err => {
+            console.log(err)
+         }
+      })
+   }
+   });
+</script>
